@@ -1,5 +1,4 @@
 <?php
-
 /**
  * post-types.php
  * This file is responsible for loading all the custom post types defined in the Foundry Frame plugin.
@@ -12,6 +11,8 @@
 namespace FoundryFrame\Includes\Loaders;
 
 use FoundryFrame\Config\Config;
+
+require_once __DIR__ . '/../post-types/abstract/abstract-post-type.php';
 
 class PostTypesLoader
 {
@@ -44,20 +45,20 @@ class PostTypesLoader
      */
     public function load()
     {
-        if ($this->post_types && is_array($this->post_types)) {
-            foreach ($this->post_types as $post_type) {
+        if ( $this->post_types && is_array( $this->post_types ) ) {
+            foreach ( $this->post_types as $post_type ) {
                 // Find the post type class file based on the post type name
                 $post_type_class_file = __DIR__ . '/../post-types/' . $post_type . '-post-type.php';
                 
-                if (file_exists($post_type_class_file)) {
+                if ( file_exists( $post_type_class_file ) ) {
                     // Require the post type class file
                     require_once $post_type_class_file;
 
                     // Instantiate the post type class and register the post type
-                    $post_type_class_name = 'FoundryFrame\\PostTypes\\' . ucfirst($post_type) . 'PostType';
+                    $post_type_class_name = 'FoundryFrame\\PostTypes\\' . $this->slug_to_studly( $post_type ) . 'PostType';
 
                     // Check if the post type class exists before instantiating it
-                    if (class_exists($post_type_class_name)) {
+                    if ( class_exists( $post_type_class_name ) ) {
                         $post_type_instance = new $post_type_class_name();
 
                         // Activate the post type by calling the register_post_type method
@@ -66,5 +67,19 @@ class PostTypesLoader
                 }
             }
         }
+    }
+
+    /**
+     * Convert a kebab/underscore slug into StudlyCase.
+     *
+     * @param string $slug The slug to transform.
+     * @return string
+     */
+    protected function slug_to_studly( $slug )
+    {
+        $parts = preg_split( '/[-_]+/', (string) $slug );
+        $parts = array_map( 'ucfirst', $parts );
+
+        return implode( '', $parts );
     }
 }

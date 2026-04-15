@@ -9,9 +9,7 @@
  */
 namespace FoundryFrame\PostTypes;
 
-use FoundryFrame\PostTypes\Abstract\AbstractPostType;
-
-class ProjectPostType extends AbstractPostType
+class ProjectPostType extends Abstract\AbstractPostType
 {
     /**
      * $post_type_name
@@ -47,13 +45,13 @@ class ProjectPostType extends AbstractPostType
      * $post_type_supports
      * This property holds an array of features that the project post type supports, including 'title', 'editor', and 'thumbnail'.
      */
-    protected $post_type_supports = ['title', 'editor', 'thumbnail'];
+    protected $post_type_supports = [ 'title', 'editor', 'thumbnail', 'excerpt' ];
 
     /**
      * $post_type_taxonomies
      * This property holds an array of taxonomies that the project post type is associated with, including 'category' and 'post_tag'.
      */
-    protected $post_type_taxonomies = ['category', 'post_tag'];
+    protected $post_type_taxonomies = [ 'project_category', 'service_type', 'industry', 'technology' ];
 
     /**
      * register_post_type
@@ -79,14 +77,18 @@ class ProjectPostType extends AbstractPostType
         ];
 
         $args = [
-            'labels' => $labels,
-            'public' => $this->post_type_public,
-            'has_archive' => $this->post_type_has_archive,
-            'supports' => $this->post_type_supports,
-            'taxonomies' => $this->post_type_taxonomies,
+            'labels'        => $labels,
+            'public'        => $this->post_type_public,
+            'has_archive'   => $this->post_type_has_archive,
+            'supports'      => $this->post_type_supports,
+            'taxonomies'    => $this->post_type_taxonomies,
+            'show_in_rest'  => true,
+            'menu_position' => 21,
+            'menu_icon'     => 'dashicons-portfolio',
+            'rewrite'       => [ 'slug' => 'projects', 'with_front' => false ],
         ];
 
-        \register_post_type($this->post_type_name, $args);
+        \register_post_type( $this->post_type_name, $args );
     }
 
 }

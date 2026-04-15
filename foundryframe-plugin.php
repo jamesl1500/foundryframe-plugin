@@ -19,8 +19,8 @@
  */
 
 // If this file is called directly, abort.
-if (!defined('WPINC') or !defined('ABSPATH')) {
-    die;
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
 }
 
 // Include autoload
@@ -28,11 +28,21 @@ if ( file_exists( __DIR__. '/vendor/autoload.php' ) ) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
 
+// Ensure config class is available before constants are defined.
+require_once __DIR__ . '/includes/config/config.php';
+
 // Load the define file to set up constants
 require_once __DIR__ . '/includes/config/define.php';
 
 // Load the bootstrap file to initialize the plugin
 require_once __DIR__ . '/includes/bootstrap.php';
 
+// Load activation/deactivation callbacks.
+require_once __DIR__ . '/includes/activator.php';
+require_once __DIR__ . '/includes/deactivator.php';
+
+\register_activation_hook( __FILE__, 'FoundryFrame\\Includes\\activate_plugin' );
+\register_deactivation_hook( __FILE__, 'FoundryFrame\\Includes\\deactivate_plugin' );
+
 // Initialize the plugin
-FoundryFrame\Includes\initialize_plugin();
+\add_action( 'plugins_loaded', 'FoundryFrame\\Includes\\initialize_plugin' );

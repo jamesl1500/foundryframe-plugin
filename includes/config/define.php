@@ -12,45 +12,65 @@ namespace FoundryFrame\Config;
 /**
  * Plugin Name
  */
-define('FOUNDARY_FRAME_PLUGIN_NAME', Config::get_plugin_name());
+if ( ! defined( 'FOUNDARY_FRAME_PLUGIN_NAME' ) ) {
+	define( 'FOUNDARY_FRAME_PLUGIN_NAME', Config::get_plugin_name() );
+}
 
 /**
  * Plugin Slug
  */
-define('FOUNDARY_FRAME_PLUGIN_SLUG', Config::get_plugin_slug());
+if ( ! defined( 'FOUNDARY_FRAME_PLUGIN_SLUG' ) ) {
+	define( 'FOUNDARY_FRAME_PLUGIN_SLUG', Config::get_plugin_slug() );
+}
 
 /**
  * Plugin Version
  */
-define('FOUNDARY_FRAME_PLUGIN_VERSION', Config::get_plugin_version());
+if ( ! defined( 'FOUNDARY_FRAME_PLUGIN_VERSION' ) ) {
+	define( 'FOUNDARY_FRAME_PLUGIN_VERSION', Config::get_plugin_version() );
+}
 
 /**
  * Plugin Author
  */
-define('FOUNDARY_FRAME_PLUGIN_AUTHOR', Config::get_plugin_author());
+if ( ! defined( 'FOUNDARY_FRAME_PLUGIN_AUTHOR' ) ) {
+	define( 'FOUNDARY_FRAME_PLUGIN_AUTHOR', Config::get_plugin_author() );
+}
 
 /**
  * Plugin Description
  */
-define('FOUNDARY_FRAME_PLUGIN_DESCRIPTION', Config::get_plugin_description());
+if ( ! defined( 'FOUNDARY_FRAME_PLUGIN_DESCRIPTION' ) ) {
+	define( 'FOUNDARY_FRAME_PLUGIN_DESCRIPTION', Config::get_plugin_description() );
+}
 
 /**
  * Plugin URI
  */
-define('FOUNDARY_FRAME_PLUGIN_URI', Config::get_plugin_uri());
+if ( ! defined( 'FOUNDARY_FRAME_PLUGIN_URI' ) ) {
+	define( 'FOUNDARY_FRAME_PLUGIN_URI', Config::get_plugin_uri() );
+}
 
 /**
  * Plugin Author URI
  */
-define('FOUNDARY_FRAME_PLUGIN_AUTHOR_URI', Config::get_plugin_author_uri());
+if ( ! defined( 'FOUNDARY_FRAME_PLUGIN_AUTHOR_URI' ) ) {
+	define( 'FOUNDARY_FRAME_PLUGIN_AUTHOR_URI', Config::get_plugin_author_uri() );
+}
 
 /**
  * Plugin Path
  */
-define('FOUNDARY_FRAME_PLUGIN_PATH', plugin_dir_path(__FILE__));
+$plugin_root_path = dirname( __DIR__, 2 ) . '/';
+
+if ( ! defined( 'FOUNDARY_FRAME_PLUGIN_PATH' ) ) {
+	define( 'FOUNDARY_FRAME_PLUGIN_PATH', $plugin_root_path );
+}
 
 /**
  * Plugin URL
  */
-define('FOUNDARY_FRAME_PLUGIN_URL', plugin_dir_url(__FILE__));
+if ( ! defined( 'FOUNDARY_FRAME_PLUGIN_URL' ) ) {
+	define( 'FOUNDARY_FRAME_PLUGIN_URL', \plugin_dir_url( $plugin_root_path . 'foundryframe-plugin.php' ) );
+}
 

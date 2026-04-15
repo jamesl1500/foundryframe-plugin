@@ -26,6 +26,19 @@ class Config
     // Post types
     public static $post_types = [
         'project',
+        'case-study',
+        'client',
+        'service',
+        'testimonial',
+    ];
+
+    // Taxonomies
+    public static $taxonomies = [
+        'project-category',
+        'service-type',
+        'industry',
+        'technology',
+        'client-type',
     ];
 
     /**
@@ -114,5 +127,16 @@ class Config
     public static function get_post_types()
     {        
         return self::$post_types;
+    }
+
+    /**
+     * get_taxonomies
+     * This method returns the array of taxonomies defined in the configuration.
+     * 
+     * @return array The array of taxonomies
+     */    
+    public static function get_taxonomies()
+    {        
+        return self::$taxonomies;
     }
 }

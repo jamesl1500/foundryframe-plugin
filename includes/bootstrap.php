@@ -9,11 +9,12 @@
  */
 namespace FoundryFrame\Includes;
 
-// Load the configuration file
-require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/loader.php';
 
 // Initialize the application
 function initialize_plugin()
 {
-
+    // Load the necessary components of the plugin
+    $loader = new Loader();
+    $loader->load();
 }
